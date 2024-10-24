@@ -1,6 +1,7 @@
 package com.s333329.mappe2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,10 +31,16 @@ public class ListOverview extends AppCompatActivity {
         dataSource.open();
         showBirthdays = findViewById(R.id.birthdayView);
         String tekst = "";
-        List<Birthday> birthdays = dataSource.findAllBirthdays();
-        for (Birthday bd : birthdays) {
-            tekst = tekst + " " + bd.getName();
+        try{
+            List<Birthday> birthdays = dataSource.findAllBirthdays();
+            for (Birthday bd : birthdays) {
+                tekst = tekst + " " + bd.getName() + bd.getNumber() + bd.getDate();
+            }
+            showBirthdays.setText(tekst);
+            Log.i("ListOverview","Success receiving database");
+        } catch(Exception e){
+            Log.e("ListOverview","Error when receiving database",e);
         }
-        showBirthdays.setText(tekst);
+
     }
 }

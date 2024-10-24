@@ -1,7 +1,9 @@
 package com.s333329.mappe2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -62,12 +64,21 @@ public class RegisterBirthday  extends AppCompatActivity {
 
     public void showBirthdays(View v) {
         String tekst = "";
-        List<Birthday> birthdays = dataSource.findAllBirthdays();
-        for (Birthday bdays : birthdays) {
-            tekst = tekst + " " + bdays.getName() + bdays.getDate() + bdays.getNumber();
+        try{
+            List<Birthday> birthdays = dataSource.findAllBirthdays();
+            for (Birthday bdays : birthdays) {
+                tekst = tekst + " " + bdays.getName() + bdays.getDate() + bdays.getNumber();
+            }
+            writeToApp.setText(tekst);
+        } catch(Exception e){
+            Log.e("RegisterBithday","error when receiving birthdays",e);
         }
-         writeToApp.setText(tekst);
     }
+    public void goToList(View v){
+        Intent i = new Intent(this, ListOverview.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onResume() {
         dataSource.open();
