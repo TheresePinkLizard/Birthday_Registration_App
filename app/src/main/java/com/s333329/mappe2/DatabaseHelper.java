@@ -9,6 +9,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "birthdays.db";
     private static final int DATABASE_VERSION = 1;
     public static final String BIRTHDAY_LIST = "birthdays";
+
     public static final String KOLONNE_ID = "id";
     public static final String KOLONNE_BIRTHDAY_NAME = "name";
     public static final String KOLONNE_BIRTHDAY_NUMBER = "number";

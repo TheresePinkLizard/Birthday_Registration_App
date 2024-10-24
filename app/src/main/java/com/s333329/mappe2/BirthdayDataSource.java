@@ -32,10 +32,14 @@ public class BirthdayDataSource {
         long insertValues = database.insert(DatabaseHelper.BIRTHDAY_LIST, null, values);
 
         Cursor cursor = database.query(DatabaseHelper.BIRTHDAY_LIST, null, DatabaseHelper.KOLONNE_ID + " = " + insertValues, null, null, null, null);
-        cursor.moveToFirst();
-        Birthday newBirthday = cursorToBirthday(cursor);
-        cursor.close();
-        return newBirthday;
+        if(cursor != null && cursor.moveToFirst()){
+            Birthday newBirthday = cursorToBirthday(cursor);
+            cursor.close();
+            return newBirthday;
+        } else{
+            return null;
+        }
+
     }
     private Birthday cursorToBirthday(Cursor cursor) {  //cursor metode: lager et oppgave objekt og setter id til oppgaveobjektet?
         Birthday birthday = new Birthday();

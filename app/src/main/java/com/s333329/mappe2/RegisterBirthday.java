@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.util.Log;
 
 import java.util.List;
 
@@ -48,10 +49,14 @@ public class RegisterBirthday  extends AppCompatActivity {
         String writenumber = numberText.getText().toString();
         String writebirthday = birthdayDate.getText().toString();
         if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
+            try{
             Birthday data = dataSource.addBirthday(writename, writenumber, writebirthday);
-            nameText.setText("");
-            numberText.setText("");
-            birthdayDate.setText("");
+                nameText.setText("");
+                numberText.setText("");
+                birthdayDate.setText("");
+            }catch(Exception e){
+               Log.e("RegisterBirthday","Data is null",e);
+            }
         }
     }
 

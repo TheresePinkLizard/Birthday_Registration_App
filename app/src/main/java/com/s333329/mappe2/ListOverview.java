@@ -26,8 +26,9 @@ public class ListOverview extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        dataSource = new BirthdayDataSource(this);
         dataSource.open();
-      showBirthdays = findViewById(R.id.birthdayView);
+        showBirthdays = findViewById(R.id.birthdayView);
         String tekst = "";
         List<Birthday> birthdays = dataSource.findAllBirthdays();
         for (Birthday bd : birthdays) {
