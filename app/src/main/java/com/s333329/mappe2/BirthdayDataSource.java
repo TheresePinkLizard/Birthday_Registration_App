@@ -26,8 +26,8 @@ public class BirthdayDataSource {
     public Birthday addBirthday(String name, String number, String date) {  //insert metode returnerer verdien til raden som er satt inn
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NAME, name);
-        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NAME, number);
-        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NAME, date);
+        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NUMBER, number);
+        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_DATE, date);
 
         long insertValues = database.insert(DatabaseHelper.BIRTHDAY_LIST, null, values);
 

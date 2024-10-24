@@ -31,5 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        Button showBirthdays = (Button) findViewById(R.id.showAllRegistered);
+        Intent j = new Intent(this, ListOverview.class);
+        showBirthdays.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(i);
+            }
+        });
     }
 }

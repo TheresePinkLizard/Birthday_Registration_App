@@ -20,7 +20,8 @@ public class RegisterBirthday  extends AppCompatActivity {
     private EditText numberText;
     private EditText birthdayDate;
     private List<Birthday> birthdaylist;
-    private TextView showBirthdays;
+    private TextView writeToApp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class RegisterBirthday  extends AppCompatActivity {
         nameText = findViewById(R.id.writename);
         numberText = findViewById(R.id.writenumber);
         birthdayDate = findViewById(R.id.writebirthday);
+        writeToApp = findViewById(R.id.showbirthdaysinregister);
 
 
     }
@@ -45,7 +47,7 @@ public class RegisterBirthday  extends AppCompatActivity {
         String writename = nameText.getText().toString();
         String writenumber = numberText.getText().toString();
         String writebirthday = birthdayDate.getText().toString();
-        if (!writename.isEmpty() && !writebirthday.isEmpty() && writenumber.isEmpty()) {
+        if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
             Birthday data = dataSource.addBirthday(writename, writenumber, writebirthday);
             nameText.setText("");
             numberText.setText("");
@@ -53,13 +55,13 @@ public class RegisterBirthday  extends AppCompatActivity {
         }
     }
 
-    public void showList(View v) {
+    public void showBirthdays(View v) {
         String tekst = "";
-        List<Birthday> oppgaver = dataSource.findAllBirthdays();
-        for (Birthday opp : oppgaver) {
-            tekst = tekst + " " + opp.getName();
+        List<Birthday> birthdays = dataSource.findAllBirthdays();
+        for (Birthday bdays : birthdays) {
+            tekst = tekst + " " + bdays.getName() + bdays.getDate() + bdays.getNumber();
         }
-        showBirthdays.setText(tekst);
+         writeToApp.setText(tekst);
     }
     @Override
     protected void onResume() {
