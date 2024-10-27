@@ -9,10 +9,31 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="374dp"
-        android:layout_height="564dp"
+        android:layout_width="373dp"
+        android:layout_height="494dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="212dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/tilbakeforside_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Tilbake til forside"
+        android:onClick="goToFrontpage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="292dp"
         android:layout_marginTop="140dp"
+        android:text="Legg til"
+        android:onClick="goToRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,8 +41,8 @@
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="288dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="140dp"
         android:text="Delete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,8 +51,8 @@
         android:id="@+id/veiledning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="164dp"
         android:text="veiledning"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +62,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
         android:text="Liste"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"

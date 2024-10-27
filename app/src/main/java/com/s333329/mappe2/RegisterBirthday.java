@@ -42,17 +42,16 @@ public class RegisterBirthday  extends AppCompatActivity {
         nameText = findViewById(R.id.writename);
         numberText = findViewById(R.id.writenumber);
         birthdayDate = findViewById(R.id.writebirthday);
-        writeToApp = findViewById(R.id.showbirthdaysinregister);
-
-
     }
+
+
     public void leggtil(View v) {
         String writename = nameText.getText().toString();
         String writenumber = numberText.getText().toString();
         String writebirthday = birthdayDate.getText().toString();
         if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
             try{
-            Birthday data = dataSource.addBirthday(writename, writenumber, writebirthday);
+            dataSource.addBirthday(writename, writenumber, writebirthday);
                 nameText.setText("");
                 numberText.setText("");
                 birthdayDate.setText("");
@@ -62,23 +61,11 @@ public class RegisterBirthday  extends AppCompatActivity {
         }
     }
 
-    public void showBirthdays(View v) {
-        String tekst = "";
-        try{
-            List<Birthday> birthdays = dataSource.findAllBirthdays();
-            for (Birthday bdays : birthdays) {
-                tekst = tekst + " " + bdays.getName() + bdays.getDate() + bdays.getNumber();
-            }
-            writeToApp.setText(tekst);
-        } catch(Exception e){
-            Log.e("RegisterBithday","error when receiving birthdays",e);
-        }
-    }
+
     public void goToList(View v){
         Intent i = new Intent(this, ListOverview.class);
         startActivity(i);
     }
-
 
     @Override
     protected void onResume() {

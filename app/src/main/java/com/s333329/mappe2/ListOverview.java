@@ -28,6 +28,7 @@ public class ListOverview extends AppCompatActivity {
     private HashSet<Integer> selectedPositions = new HashSet<>(); // Multiple selections
     private BirthdayAdapter myAdapter;
     private List<String> birthdayList = new ArrayList<>();
+    List<Birthday> birthdays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,12 @@ public class ListOverview extends AppCompatActivity {
         // Adds birthdays to birthdaylist
         dataSource = new BirthdayDataSource(this);
         dataSource.open();
-        String tekst = "";
+
+        birthdays = dataSource.findAllBirthdays();
+
         try{
-            List<Birthday> birthdays = dataSource.findAllBirthdays();
             for (Birthday bd : birthdays) {
-                tekst = tekst + " " + bd.getName() + " tlf: "+bd.getNumber() +" bursdag: "+ bd.getDate();
+                String tekst =" Navn: " + bd.getName() + ", Tlf: "+bd.getNumber() +", Bursdag: "+ bd.getDate();
                 birthdayList.add(tekst);
             }
             Log.i("ListOverview","Success receiving database");
@@ -77,12 +79,6 @@ public class ListOverview extends AppCompatActivity {
         });
 
         Button deleteButton = findViewById(R.id.delete_button);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // delete selected item
-            }
-        });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,9 +86,11 @@ public class ListOverview extends AppCompatActivity {
                 try{
                     dataSource.open();
                     List<String> selectedItems = new ArrayList<>();
+
                     for (int position : selectedPositions) {
                         selectedItems.add(birthdayList.get(position));
-                        dataSource.deleteBirthday(position);
+                        Birthday toDelete = birthdays.get(position);
+                        dataSource.deleteBirthday(toDelete.getId());
                     }
                     birthdayList.removeAll(selectedItems);
                     selectedPositions.clear();
@@ -104,6 +102,7 @@ public class ListOverview extends AppCompatActivity {
 
             }
         });
+
     }
 
 

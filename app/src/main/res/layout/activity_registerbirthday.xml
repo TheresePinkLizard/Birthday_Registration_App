@@ -20,21 +20,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/showbirthdaysinregister"
-        android:layout_width="174dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="492dp"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/veiledning"
         android:layout_width="168dp"
         android:layout_height="36dp"
         android:layout_marginStart="168dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="508dp"
         android:text="Tilbakemeldingsfelt"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,22 +98,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/showBirthdaysButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="580dp"
-        android:onClick="showBirthdays"
-        android:text="Vis innhold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="580dp"
         android:onClick="goToList"
         android:text="Til liste"
         app:layout_constraintStart_toStartOf="parent"
