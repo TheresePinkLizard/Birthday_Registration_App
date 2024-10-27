@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,24 @@ public class BirthdayDataSource {
             } while (cursor.moveToNext());
         }
         return oppgaver;
+    }
+    public void deleteBirthday(long birthdayId) {
+        try{
+            database.delete(DatabaseHelper.BIRTHDAY_LIST,
+                    DatabaseHelper.KOLONNE_ID + " =? ", new
+                            String[]{Long.toString(birthdayId)});
+        } catch(Exception e){
+            Log.e("BirthdayDataSource","Could not find id to delete",e);
+        }
+
+    }
+    public void updateBirthday(long id, String name, String number, String date) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NAME, name);
+        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_NUMBER, number);
+        values.put(DatabaseHelper.KOLONNE_BIRTHDAY_DATE, date);
+
+        database.update(DatabaseHelper.BIRTHDAY_LIST, values, DatabaseHelper.KOLONNE_ID + " =? ", new String[]{Long.toString(id)});
     }
 
 }

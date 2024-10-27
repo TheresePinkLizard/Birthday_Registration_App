@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         showBirthdays.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(i);
+                startActivity(j);
             }
         });
     }

@@ -79,6 +79,7 @@ public class RegisterBirthday  extends AppCompatActivity {
         startActivity(i);
     }
 
+
     @Override
     protected void onResume() {
         dataSource.open();
