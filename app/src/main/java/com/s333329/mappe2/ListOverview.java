@@ -1,5 +1,6 @@
 package com.s333329.mappe2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,8 +104,25 @@ public class ListOverview extends AppCompatActivity {
             }
         });
 
-    }
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+                Intent intent = new Intent(ListOverview.this, RegisterBirthday.class);
+                intent.putExtra("birthday_id", birthdays.get(position).getId());
+                startActivity(intent);
+                return true;
+            }
+        });
 
+    }
+    public void goToRegister(View v){
+        Intent i = new Intent(this, RegisterBirthday.class);
+        startActivity(i);
+    }
+    public void goToFrontpage(View v){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 
 
 }

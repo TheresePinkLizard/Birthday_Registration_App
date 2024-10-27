@@ -24,6 +24,8 @@ public class RegisterBirthday  extends AppCompatActivity {
     private EditText birthdayDate;
     private List<Birthday> birthdaylist;
     private TextView writeToApp;
+    private boolean changemode;
+    private long birthdayPosition;
 
 
     @Override
@@ -42,6 +44,27 @@ public class RegisterBirthday  extends AppCompatActivity {
         nameText = findViewById(R.id.writename);
         numberText = findViewById(R.id.writenumber);
         birthdayDate = findViewById(R.id.writebirthday);
+        birthdaylist = dataSource.findAllBirthdays();
+
+        // change contents of the birthday object. gets id from long clicking birthday in list
+        Intent intent = getIntent();
+        long selectedBirthdayId = intent.getLongExtra("birthday_id", -1);
+        if(selectedBirthdayId != -1){
+            changemode = true;
+            birthdayPosition = selectedBirthdayId;
+            for (Birthday b : birthdaylist){
+                if (b.getId() == birthdayPosition){
+                    nameText.setText(b.getName());
+                    numberText.setText(b.getNumber());
+                    birthdayDate.setText(b.getDate());
+                }
+
+            }
+
+        }else{
+            Log.e("RegisterBirthday","Failed to get id when changing birthday");
+        }
+
     }
 
 
@@ -50,14 +73,20 @@ public class RegisterBirthday  extends AppCompatActivity {
         String writenumber = numberText.getText().toString();
         String writebirthday = birthdayDate.getText().toString();
         if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
-            try{
-            dataSource.addBirthday(writename, writenumber, writebirthday);
+            try {
+                if (changemode) {
+                    dataSource.updateBirthday(birthdayPosition, writename, writenumber, writebirthday);
+                } else {
+                    dataSource.addBirthday(writename, writenumber, writebirthday);
+                }
                 nameText.setText("");
                 numberText.setText("");
                 birthdayDate.setText("");
-            }catch(Exception e){
-               Log.e("RegisterBirthday","Data is null",e);
+
+            } catch (Exception e) {
+                Log.e("RegisterBirthday", "Data is null", e);
             }
+
         }
     }
 
