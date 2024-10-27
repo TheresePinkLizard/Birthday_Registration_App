@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".RegisterBirthday"></activity>
         <activity android:name=".ListOverview"></activity>
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

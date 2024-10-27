@@ -65,6 +65,7 @@ public class ListOverview extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         listView.setAdapter(myAdapter);
 
+        // checks if birthdays are seleted and change the backgrund color
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,

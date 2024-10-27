@@ -23,21 +23,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button registrer = (Button) findViewById(R.id.registerNew);
+
+    }
+    public void goToRegisterfromHome(View v){
         Intent i = new Intent(this, RegisterBirthday.class);
-        registrer.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                startActivity(i);
-            }
-        });
-        Button showBirthdays = (Button) findViewById(R.id.showAllRegistered);
-        Intent j = new Intent(this, ListOverview.class);
-        showBirthdays.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                startActivity(j);
-            }
-        });
+        startActivity(i);
+    }
+    public void goToAllRegistered(View v){
+        Intent i = new Intent(this, ListOverview.class);
+        startActivity(i);
+    }
+    public void goToSettings(View v){
+        Intent i = new Intent(this, Settings.class);
+        startActivity(i);
     }
 }

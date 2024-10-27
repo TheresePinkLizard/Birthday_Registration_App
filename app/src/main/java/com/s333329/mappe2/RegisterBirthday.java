@@ -23,7 +23,6 @@ public class RegisterBirthday  extends AppCompatActivity {
     private EditText numberText;
     private EditText birthdayDate;
     private List<Birthday> birthdaylist;
-    private TextView writeToApp;
     private boolean changemode;
     private long birthdayPosition;
 
@@ -50,7 +49,7 @@ public class RegisterBirthday  extends AppCompatActivity {
         Intent intent = getIntent();
         long selectedBirthdayId = intent.getLongExtra("birthday_id", -1);
         if(selectedBirthdayId != -1){
-            changemode = true;
+            changemode = true; // changemode set to true to update birthday instead of adding
             birthdayPosition = selectedBirthdayId;
             for (Birthday b : birthdaylist){
                 if (b.getId() == birthdayPosition){
@@ -58,13 +57,10 @@ public class RegisterBirthday  extends AppCompatActivity {
                     numberText.setText(b.getNumber());
                     birthdayDate.setText(b.getDate());
                 }
-
             }
-
         }else{
             Log.e("RegisterBirthday","Failed to get id when changing birthday");
         }
-
     }
 
 
@@ -74,8 +70,10 @@ public class RegisterBirthday  extends AppCompatActivity {
         String writebirthday = birthdayDate.getText().toString();
         if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
             try {
+                // changemode to update birthday instead of adding
                 if (changemode) {
                     dataSource.updateBirthday(birthdayPosition, writename, writenumber, writebirthday);
+                    Log.i("RegisterBirthday","Updated selected birthday");
                 } else {
                     dataSource.addBirthday(writename, writenumber, writebirthday);
                 }
@@ -84,17 +82,25 @@ public class RegisterBirthday  extends AppCompatActivity {
                 birthdayDate.setText("");
 
             } catch (Exception e) {
-                Log.e("RegisterBirthday", "Data is null", e);
+                if (changemode){
+                    Log.e("RegisterBirthday", "Could not update birthday", e);
+                }else{
+                    Log.e("RegisterBirthday", "Could not add new birthday", e);
+                }
             }
-
         }
     }
 
-
+    // button to go to birthday listview
     public void goToList(View v){
         Intent i = new Intent(this, ListOverview.class);
         startActivity(i);
     }
+    public void goToFrontPage(View v){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
 
     @Override
     protected void onResume() {
