@@ -28,8 +28,9 @@ public class ListOverview extends AppCompatActivity {
     private ListView listView;
     private HashSet<Integer> selectedPositions = new HashSet<>(); // Multiple selections
     private BirthdayAdapter myAdapter;
-    private List<String> birthdayList = new ArrayList<>();
+    private List<Birthday> birthdayList = new ArrayList<>();
     List<Birthday> birthdays;
+    private TextView error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,14 @@ public class ListOverview extends AppCompatActivity {
 
         try{
             for (Birthday bd : birthdays) {
-                String tekst =" Navn: " + bd.getName() + ", Tlf: "+bd.getNumber() +", Bursdag: "+ bd.getDate();
+                birthdayList.add(bd);
+            }
+            /*
+             for (Birthday bd : birthdays) {
+                String tekst = bd.getName() + "     "+bd.getNumber() +"     "+ bd.getDate();
                 birthdayList.add(tekst);
             }
+             */
             Log.i("ListOverview","Success receiving database");
         } catch(Exception e){
             Log.e("ListOverview","Error when receiving database",e);
@@ -65,6 +71,9 @@ public class ListOverview extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         listView.setAdapter(myAdapter);
 
+        //gets the error message view
+        error = findViewById(R.id.error);
+
         // checks if birthdays are seleted and change the backgrund color
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,34 +83,40 @@ public class ListOverview extends AppCompatActivity {
                     selectedPositions.remove(position);
                     view.setBackgroundColor(Color.TRANSPARENT); // Or your default color
                 } else { // If not selected, select it
+                    error.setText("");
                     selectedPositions.add(position);
                     view.setBackgroundColor(Color.LTGRAY); // Or your selection color
                 }
             }
         });
 
+        //code to delete birthdays
         Button deleteButton = findViewById(R.id.delete_button);
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    dataSource.open();
-                    List<String> selectedItems = new ArrayList<>();
+                if (selectedPositions.isEmpty()){
+                    error.setTextColor(Color.RED);
+                    error.setText("Du må velge hvilke bursdager du skal slette først");
+                }else {
+                    try {
+                        dataSource.open();
+                        List<Birthday> selectedItems = new ArrayList<>();
 
-                    for (int position : selectedPositions) {
-                        selectedItems.add(birthdayList.get(position));
-                        Birthday toDelete = birthdays.get(position);
-                        dataSource.deleteBirthday(toDelete.getId());
+                        for (int position : selectedPositions) {
+                            selectedItems.add(birthdayList.get(position));
+                            Birthday toDelete = birthdays.get(position);
+                            dataSource.deleteBirthday(toDelete.getId());
+                        }
+                        birthdayList.removeAll(selectedItems);
+                        selectedPositions.clear();
+                        myAdapter.notifyDataSetChanged();
+                        Log.i("ListOverview", "Successfully removed birthday from database");
+                    } catch (Exception e) {
+                        Log.e("MainActivity", "Could not parse long int", e);
                     }
-                    birthdayList.removeAll(selectedItems);
-                    selectedPositions.clear();
-                    myAdapter.notifyDataSetChanged();
-                    Log.i("ListOverview","Successfully removed birthday from database");
-                } catch (Exception e){
-                    Log.e("MainActivity","Could not parse long int",e);
                 }
-
             }
         });
 

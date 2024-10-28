@@ -13,6 +13,8 @@
         android:inputType="text"
         android:defaultValue="Gratulerer med dagen!" />
 
-
+    <Preference
+        android:key="preference_time"
+        android:title="Velg klokkeslett" />
 
 </PreferenceScreen>

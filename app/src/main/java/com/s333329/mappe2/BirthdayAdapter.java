@@ -11,16 +11,16 @@ import android.widget.TextView;
 import java.util.HashSet;
 import java.util.List;
 
-public class BirthdayAdapter extends ArrayAdapter<String> {
+public class BirthdayAdapter extends ArrayAdapter<Birthday> {
     private Context context;
-    private List<String> items;
+    private List<Birthday> birthdaylist;
     private int resource;
     private HashSet<Integer> selectedPositions = new HashSet<>();
 
-    public BirthdayAdapter(Context context, int resource, List<String> items) {
-        super(context, resource, items);
+    public BirthdayAdapter(Context context, int resource, List<Birthday> birthdaylist) {
+        super(context, resource, birthdaylist);
         this.context = context;
-        this.items = items;
+        this.birthdaylist = birthdaylist;
         this.resource = resource;
     }
 
@@ -30,8 +30,16 @@ public class BirthdayAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(context).inflate(resource, parent, false);
         }
 
-        TextView textView = convertView.findViewById(R.id.list_item_text);
-        textView.setText(items.get(position));
+        Birthday currentBirthday = birthdaylist.get(position);
+
+        TextView nameTextView = convertView.findViewById(R.id.name_text);
+        nameTextView.setText(currentBirthday.getName());
+
+        TextView numberTextView = convertView.findViewById(R.id.number_text);
+        numberTextView.setText(currentBirthday.getNumber());
+
+        TextView dateTextView = convertView.findViewById(R.id.date_text);
+        dateTextView.setText(currentBirthday.getDate());
 
         if (selectedPositions.contains(position)) {
             convertView.setBackgroundColor(Color.LTGRAY); // Or your selection color

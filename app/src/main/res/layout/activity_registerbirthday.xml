@@ -5,17 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/backgroundevenlighter">
 
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="321dp"
-        android:layout_height="66dp"
+        android:layout_width="334dp"
+        android:layout_height="70dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="116dp"
+        android:fontFamily="@font/modernheritage_display"
         android:text="Registrer bursdag"
-        android:textSize="30sp"
+        android:textColor="#6750a4"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,6 +62,7 @@
         android:layout_marginStart="148dp"
         android:layout_marginTop="376dp"
         android:inputType="text"
+        android:hint="YYYY-MM-DD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

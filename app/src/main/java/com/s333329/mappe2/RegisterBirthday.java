@@ -1,5 +1,6 @@
 package com.s333329.mappe2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.view.inputmethod.InputMethodManager;
 import android.util.Log;
 
 import java.util.List;
@@ -58,8 +60,6 @@ public class RegisterBirthday  extends AppCompatActivity {
                     birthdayDate.setText(b.getDate());
                 }
             }
-        }else{
-            Log.e("RegisterBirthday","Failed to get id when changing birthday");
         }
     }
 
@@ -70,16 +70,24 @@ public class RegisterBirthday  extends AppCompatActivity {
         String writebirthday = birthdayDate.getText().toString();
         if (!writename.isEmpty() && !writebirthday.isEmpty() && !writenumber.isEmpty()) {
             try {
+                //hide the keyboard
+                hideKeyboard(v);
                 // changemode to update birthday instead of adding
                 if (changemode) {
                     dataSource.updateBirthday(birthdayPosition, writename, writenumber, writebirthday);
                     Log.i("RegisterBirthday","Updated selected birthday");
+
+                    // When its updated it goes back to list
+                    Intent i = new Intent(this, ListOverview.class);
+                    startActivity(i);
                 } else {
                     dataSource.addBirthday(writename, writenumber, writebirthday);
                 }
                 nameText.setText("");
                 numberText.setText("");
                 birthdayDate.setText("");
+
+
 
             } catch (Exception e) {
                 if (changemode){
@@ -90,7 +98,11 @@ public class RegisterBirthday  extends AppCompatActivity {
             }
         }
     }
-
+    // hide keyboard
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     // button to go to birthday listview
     public void goToList(View v){
         Intent i = new Intent(this, ListOverview.class);

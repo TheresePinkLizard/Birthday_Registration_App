@@ -24,6 +24,15 @@
         <activity android:name=".RegisterBirthday"></activity>
         <activity android:name=".ListOverview"></activity>
         <activity android:name=".Settings"></activity>
+
+        <receiver android:name=".MinBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.app.ACTION_SMS_SERVICE_ON" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".MinPeriodisk" />
+        <service android:name=".MinSendService" />
     </application>
 
 </manifest>
