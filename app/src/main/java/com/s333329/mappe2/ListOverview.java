@@ -53,12 +53,7 @@ public class ListOverview extends AppCompatActivity {
             for (Birthday bd : birthdays) {
                 birthdayList.add(bd);
             }
-            /*
-             for (Birthday bd : birthdays) {
-                String tekst = bd.getName() + "     "+bd.getNumber() +"     "+ bd.getDate();
-                birthdayList.add(tekst);
-            }
-             */
+
             Log.i("ListOverview","Success receiving database");
         } catch(Exception e){
             Log.e("ListOverview","Error when receiving database",e);

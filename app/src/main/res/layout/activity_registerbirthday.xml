@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/inputheader"
         android:layout_width="334dp"
         android:layout_height="70dp"
         android:layout_marginStart="44dp"
@@ -23,14 +23,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/veiledning"
-        android:layout_width="168dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="508dp"
-        android:text="Tilbakemeldingsfelt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="332dp"
+        android:text="Telefornr: "
         android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,20 +39,30 @@
         android:id="@+id/writename"
         android:layout_width="174dp"
         android:layout_height="58dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="224dp"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <EditText
         android:id="@+id/writenumber"
         android:layout_width="174dp"
         android:layout_height="58dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="304dp"
         android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="252dp"
+        android:text="Navn:"
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,68 +70,56 @@
         android:id="@+id/writebirthday"
         android:layout_width="174dp"
         android:layout_height="58dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="376dp"
-        android:inputType="text"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="384dp"
         android:hint="YYYY-MM-DD"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="244dp"
-        android:text="Navn:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="332dp"
-        android:text="Telefornr: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="404dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="412dp"
         android:text="Fødselsdato: "
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="508dp"
         android:onClick="leggtil"
         android:text="Ferdig"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginStart="244dp"
+        android:layout_marginTop="508dp"
         android:onClick="goToList"
         android:text="Til liste"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:onClick="goToFrontPage"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:onClick="goToFrontpage"
         android:text="Tilbake til forside"
+        android:textColor="#6750a4"
+        android:textColorLink="#00008B"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

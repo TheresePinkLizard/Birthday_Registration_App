@@ -27,6 +27,7 @@ public class RegisterBirthday  extends AppCompatActivity {
     private List<Birthday> birthdaylist;
     private boolean changemode;
     private long birthdayPosition;
+    private TextView header;
 
 
     @Override
@@ -45,13 +46,15 @@ public class RegisterBirthday  extends AppCompatActivity {
         nameText = findViewById(R.id.writename);
         numberText = findViewById(R.id.writenumber);
         birthdayDate = findViewById(R.id.writebirthday);
+        header = findViewById(R.id.inputheader);
         birthdaylist = dataSource.findAllBirthdays();
 
         // change contents of the birthday object. gets id from long clicking birthday in list
         Intent intent = getIntent();
         long selectedBirthdayId = intent.getLongExtra("birthday_id", -1);
         if(selectedBirthdayId != -1){
-            changemode = true; // changemode set to true to update birthday instead of adding
+            changemode = true;
+            header.setText("Endre bursdag");
             birthdayPosition = selectedBirthdayId;
             for (Birthday b : birthdaylist){
                 if (b.getId() == birthdayPosition){
