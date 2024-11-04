@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -25,14 +30,27 @@
         <activity android:name=".ListOverview"></activity>
         <activity android:name=".Settings"></activity>
 
-        <receiver android:name=".MinBroadcastReceiver" android:exported="true">
+        <receiver
+            android:name=".ABootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
-                <action android:name="com.example.app.ACTION_SMS_SERVICE_ON" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".MinPeriodisk" />
-        <service android:name=".MinSendService" />
+        <activity android:name=".AResultat"/>
+        <service
+            android:name=".AMinService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service android:name=".ASettPeriodiskService"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>
