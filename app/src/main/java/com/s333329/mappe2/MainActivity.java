@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,13 +33,21 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        BroadcastReceiver myBroadcastReceiver = new AMinBroadcastReceiver();
+
+        BroadcastReceiver myBroadcastReceiver = new MinBroadcastReceiver();
         IntentFilter filter;
         filter = new IntentFilter("com.s333329.mappe2.MITTSIGNAL"); // man lager eget signal
         filter.addAction("com.s333329.mappe2.MITTSIGNAL");
         this.registerReceiver(myBroadcastReceiver,filter, Context.RECEIVER_EXPORTED);
 
+        // Start the AMinService
+        Intent intentservice = new Intent(this, AMinService.class);
+        // denne koden skjønner at onstartcommand skal kjøres
+        this.startService(intentservice);
 
+        // Start the ASettPeriodiskService
+        Intent intentperiodisk = new Intent(this,ASettPeriodiskService.class);
+        this.startService(intentperiodisk);
 
 
     }
@@ -57,15 +64,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    // Service kode under:
-
-
-    // starter MinService kode som oppretter en service
-    public void startService(View v) {
-        Intent intent = new Intent(this, AMinService.class);
-        // denne koden skjønner at onstartcommand skal kjøres
-        this.startService(intent);
-    }
     // stopper service og kjører ondestroy kode i minservice
     public void stoppService(View v) {
         Intent i = new Intent(this, AMinService.class);
@@ -78,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction("com.s333329.mappe2.MITTSIGNAL");
         sendBroadcast(intent);
     }
-    public void settPeriodisk(View v) {
-        Intent intent = new Intent(this,ASettPeriodiskService.class);
-        this.startService(intent);
-    }
+
     public void stoppPeriodisk(View v){
         Intent i = new Intent(this, AMinService.class);
         PendingIntent pintent = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_IMMUTABLE);

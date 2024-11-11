@@ -43,13 +43,12 @@ public class ListOverview extends AppCompatActivity {
             return insets;
         });
 
-        // Adds birthdays to birthdaylist
-        dataSource = new BirthdayDataSource(this);
-        dataSource.open();
-
-        birthdays = dataSource.findAllBirthdays();
 
         try{
+            // Adds birthdays to birthdaylist
+            dataSource = new BirthdayDataSource(this);
+            dataSource.open();
+            birthdays = dataSource.findAllBirthdays();
             for (Birthday bd : birthdays) {
                 birthdayList.add(bd);
             }
@@ -63,6 +62,7 @@ public class ListOverview extends AppCompatActivity {
         myAdapter = new BirthdayAdapter(this, R.layout.list_birthday, birthdayList);
 
         // Get ListView from layout and set its adapter
+
         listView = findViewById(R.id.listView);
         listView.setAdapter(myAdapter);
 

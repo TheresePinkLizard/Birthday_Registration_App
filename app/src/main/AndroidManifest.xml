@@ -6,6 +6,13 @@
         android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission
+        android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -41,7 +48,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".AResultat"/>
         <service
             android:name=".AMinService"
             android:enabled="true"

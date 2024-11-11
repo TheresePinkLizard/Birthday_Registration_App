@@ -20,5 +20,6 @@ public class Settings extends AppCompatActivity {
                 .commit();
 
     }
+
 }
 

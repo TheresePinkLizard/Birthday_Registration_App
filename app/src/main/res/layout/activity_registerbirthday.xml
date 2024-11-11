@@ -72,7 +72,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="164dp"
         android:layout_marginTop="384dp"
-        android:hint="YYYY-MM-DD"
+        android:hint="DD-MM-YYYY"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,17 +95,17 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="508dp"
         android:onClick="leggtil"
-        android:text="Ferdig"
+        android:text="Legg til"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="640dp"
         android:onClick="goToList"
-        android:text="Til liste"
+        android:text="Tilbake til liste"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

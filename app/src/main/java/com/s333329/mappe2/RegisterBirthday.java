@@ -63,6 +63,8 @@ public class RegisterBirthday  extends AppCompatActivity {
                     birthdayDate.setText(b.getDate());
                 }
             }
+        } else{
+            changemode = false;
         }
     }
 
