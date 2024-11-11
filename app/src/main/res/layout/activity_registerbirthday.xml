@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/backgroundevenlighter">
+    android:background="@drawable/bilde2">
 
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="332dp"
-        android:text="Telefornr: "
+        android:text="Telefonnr: "
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
