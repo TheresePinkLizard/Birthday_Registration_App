@@ -32,8 +32,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     Log.d("SettingsFragment", "Time preference clicked");
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), null, 8, 0, true);
-                    timePickerDialog.show();
+                    showTimePickerDialog();  // Call the method here
                     return true;
                 }
             });
@@ -67,11 +66,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putInt("hour", hourOfDay);
-                        editor.putInt("minute", minute);
+                        String timeSelected = hourOfDay + ":" + minute;
+                        editor.putString("preference_time", timeSelected);
                         editor.apply();
+
+                        // setter ny tid ved siden av velg klokkeslett
+                        Preference timePreference = findPreference("preference_time");
+                        if (timePreference != null) {
+                            timePreference.setSummary(timeSelected);
+                        }
+                        // test for å se hva som lagrer seg
+                        String savedTime = preferences.getString("preference_time", null);
+                        Log.d("SettingsFragment", "Saved time: " + savedTime);
+
+                        // oppdaterer alarm
+                        Intent intent = new Intent(getActivity(), ASettPeriodiskService.class);
+                        getActivity().startService(intent);
                     }
-                }, 0, 0, true);
+                }, 8, 0, true);
         timePickerDialog.show();
     }
 
@@ -88,6 +100,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if(alarm != null){
             alarm.cancel(pintent);
             Toast.makeText(getActivity(),"SMS tjeneste er av", Toast.LENGTH_SHORT).show();
+        }
+    }
+    // Override onResume method
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Get the saved time from SharedPreferences and set as the summary
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        String time = prefs.getString("preference_time", "08:00");
+        Preference timePreference = findPreference("preference_time");
+        if (timePreference != null) {
+            timePreference.setSummary(time);
         }
     }
 }

@@ -51,7 +51,9 @@ public class AMinService extends Service {
 
         dataSource = new BirthdayDataSource(this);
         try {
-            dataSource.open();
+            if (dataSource != null){
+                dataSource.open();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,7 +98,9 @@ public class AMinService extends Service {
 
     @Override
     public void onDestroy() {
-        dataSource.close();
+        if (dataSource != null){
+            dataSource.close();
+        }
         super.onDestroy();
         Log.d("Minservice", "Service fjernet");
     }
