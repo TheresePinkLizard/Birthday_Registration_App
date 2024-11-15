@@ -4,7 +4,9 @@
     <SwitchPreferenceCompat
         android:key="preference_send_sms"
         android:title="Send SMS"
-        android:defaultValue="false" />
+        android:defaultValue="false"
+        android:summaryOff="Off"
+        android:summaryOn="On"/>
 
     <EditTextPreference
         android:key="preference_default_message"

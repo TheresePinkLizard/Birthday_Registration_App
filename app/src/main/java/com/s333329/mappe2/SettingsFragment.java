@@ -80,7 +80,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         Log.d("SettingsFragment", "Saved time: " + savedTime);
 
                         // oppdaterer alarm
-                        Intent intent = new Intent(getActivity(), ASettPeriodiskService.class);
+                        Intent intent = new Intent(getActivity(), MinPeriodisk.class);
                         getActivity().startService(intent);
                     }
                 }, 8, 0, true);
@@ -94,7 +94,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     public void stoppPeriodisk(){
-        Intent i = new Intent(getActivity(), AMinService.class);
+        Intent i = new Intent(getActivity(), MinSendService.class);
         PendingIntent pintent = PendingIntent.getService(getActivity(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarm = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         if(alarm != null){

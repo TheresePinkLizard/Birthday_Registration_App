@@ -4,8 +4,7 @@
 
     <uses-permission
         android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission
-        android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
@@ -29,7 +28,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,25 +35,16 @@
         <activity android:name=".ListOverview"></activity>
         <activity android:name=".Settings"></activity>
 
-        <receiver
-            android:name=".ABootReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
         <service
-            android:name=".AMinService"
+            android:name=".MinSendService"
             android:enabled="true"
             android:exported="false" />
 
-        <service android:name=".ASettPeriodiskService"
+        <service android:name=".MinPeriodisk"
             android:enabled="true"
             android:exported="true" />
+
+
 
     </application>
 
