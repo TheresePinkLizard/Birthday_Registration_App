@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.SEND_SMS},
                     PERMISSION_REQUEST_SEND_SMS);
+            Log.i("Mainactivity: SmsCheckPermission","Sent request");
         }
     }
     @Override
@@ -89,9 +91,11 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, send the SMS
+                Log.i("MainActivity","Sms tillatt");
                 Toast.makeText(this, "SMS-tillatelse gitt", Toast.LENGTH_SHORT).show();
             } else {
                 // Permission denied, show a message
+                Log.i("MainActivity","Sms ikke tillatt");
                 Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();
             }
         }

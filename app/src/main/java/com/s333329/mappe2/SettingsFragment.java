@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -26,7 +27,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
+        // for å vise verdier som er i preferences og lagre dem
         Preference timePreference = findPreference("preference_time");
+        EditTextPreference defaultMessagePreference = findPreference("preference_default_message");
+
+        // tidspreferanse listener
         if (timePreference != null) {
             timePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -39,6 +44,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         } else{
             Log.d("SettingsFragment", "Time preference not found");
         }
+
+        // Listener til default tekst
+        String defaultMessage = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("preference_default_message", "Gratulerer med dagen!");
+        defaultMessagePreference.setSummary(defaultMessage);
+
+        defaultMessagePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                preference.setSummary((String) newValue);
+                return true;
+            }
+        });
 
         preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override

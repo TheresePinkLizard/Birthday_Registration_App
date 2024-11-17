@@ -52,8 +52,9 @@ public class MinSendService extends Service {
     // denne koden kjører uansett om service eksisterer allerede eller ikke. Toast vil bli vist
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("MinService","er inni minservice");
+        Log.i("MinService","er inni MinSendService");
         dataSource = new BirthdayDataSource(this);
+        // sjekker om database eksisterer og hvis den gjør det, så åpne den
         try {
             if (dataSource != null){
                 dataSource.open();
@@ -61,8 +62,9 @@ public class MinSendService extends Service {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //henter database
+        //henter database med bursdager
         birthdayList = dataSource.findAllBirthdays();
+
         // sjekker dagens bursdager og lagrer i todaysbirthdays liste
         checkBirthdays();
         return super.onStartCommand(intent, flags, startId);
@@ -70,23 +72,15 @@ public class MinSendService extends Service {
 
 
     private void sendNotification(Birthday bday){
-        //notifikasjon for å sende ut sms
-
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent i = new Intent(this,MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,i,PendingIntent.FLAG_IMMUTABLE);
-        Notification notifikasjon = new NotificationCompat.Builder(this,"MinKanal").setContentTitle("Bursdagsvarsel").setContentText("Har sendt ut en gratulasjon til "+bday.getName()+"!").setSmallIcon(R.mipmap.ic_launcher).setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pIntent).build();
+        Notification notifikasjon = new NotificationCompat.Builder(this,"MinKanal").setContentTitle("BursdagsApp").setContentText("Bursdagshilsen er sendt til " + bday.getName()).setSmallIcon(R.mipmap.ic_launcher).setPriority(NotificationCompat.PRIORITY_DEFAULT).build();
+        notifikasjon.flags |= Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(88, notifikasjon);
 
-        //For å få sendt notifikasjon til hver person må vi ha unik ID
-        Random random = new Random();
-        int uniqueID = random.nextInt(100);
-
-        notifikasjon.flags |=Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(uniqueID,notifikasjon);
     }
     //kode for å sende sms
     private void sendSms(){
-        //henter default melding og sms toggle verdi(setter også default verdi flase)
+        //henter standard melding og sms toggle verdi(setter også verdi til false ved oppstart)
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String defaultMessage = preferences.getString("preference_default_message", "Gratulerer med dagen!");
         boolean sendSms = preferences.getBoolean("preference_send_sms", false);
@@ -94,17 +88,18 @@ public class MinSendService extends Service {
         // hvis sms toggle er på så sendes sms til bursdager i listen
         if (sendSms) {
             for (Birthday todayb : todaysBirthday){
-                Log.i("MinService","output i loop" + todayb.getName());
+                Log.i("MinService","Henter fra dagens bursdag: " + todayb.getName());
                 //sender sms
                 String todaysNumber= todayb.getNumber();
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(todaysNumber,null,defaultMessage,null,null);
                 sendNotification(todayb);
-
+                Log.i("MinSendService","Sender sms");
             } todaysBirthday.clear();
         }else {
-            Toast.makeText(this, "Kunne ikke sende SMS",
+            Toast.makeText(this, "Kunne ikke sende SMS, sjekk innstillinger",
                     Toast.LENGTH_SHORT).show();
+            Log.i("MinSendService","Kunne ikke sende sms");
         }
 
     }
@@ -124,15 +119,14 @@ public class MinSendService extends Service {
         // variabel for dagens dato
         Calendar today = Calendar.getInstance();
         Log.i("Minservice","Er inni checkbirthdays");
+
         for (Birthday bday : birthdayList) {
             //prøver å konvertere bursdagsdato til date/calendar
             try {
                 // Lager en SimpleDateFormat instans med datoformat
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
                 // Parse bursdagsdato til Date objekt
                 Date date = format.parse(bday.getDate());
-
                 // Sette parsed date til Calendar objekt
                 Calendar birthday = Calendar.getInstance();
                 if (date != null) {
@@ -141,16 +135,19 @@ public class MinSendService extends Service {
                 // sjekk hvis det matcher
                 if (birthday.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
                         && birthday.get(Calendar.MONTH) == today.get(Calendar.MONTH)) {
+                    //Legges til i liste med dagens bursdager
                     todaysBirthday.add(bday);
-                    Log.i("MinService",bday.getName());
+                    Log.i("MinService",bday.getName() + " legges til i listen");
+                }
 
-                }sendSms();
             } catch (ParseException e) {
                 e.printStackTrace();
-                Log.e("AMinService","Kunne ikke parse bursdagsdato",e);
+                Log.e("AMinService","Kunne ikke parse bursdagsdato, sørg for at formatet er riktig",e);
             }
 
         }
+        // Sender sms
+        sendSms();
 
     }
 

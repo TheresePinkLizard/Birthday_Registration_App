@@ -11,10 +11,10 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="381dp"
-        android:layout_height="445dp"
+        android:layout_width="380dp"
+        android:layout_height="393dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="320dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="192dp"
         android:onClick="goToRegister"
         android:text="Legg til ny"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,18 +45,18 @@
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="192dp"
         android:text="Slette"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="394dp"
+        android:layout_height="33dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="252dp"
         android:text="        "
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,24 +77,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="60dp"
+        android:id="@+id/textView4"
+        android:layout_width="61dp"
         android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
-        android:text="Navn: "
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="288dp"
+        android:text="Tlfnr: "
         android:textSize="19dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="61dp"
+        android:id="@+id/textView3"
+        android:layout_width="60dp"
         android:layout_height="24dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="240dp"
-        android:text="Tlfnr: "
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="288dp"
+        android:text="Navn: "
         android:textSize="19dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,10 +105,30 @@
         android:layout_width="83dp"
         android:layout_height="32dp"
         android:layout_marginStart="264dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="288dp"
         android:text="Bursdag: "
         android:textSize="19dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="160dp"
+        android:text="Endre: Hold inne på bursdag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="199dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="160dp"
+        android:text="Trykk på de du ønsker å slette "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

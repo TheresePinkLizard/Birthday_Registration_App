@@ -24,7 +24,7 @@ public class MinPeriodisk extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("MinPeriodisk","I starten av MinPeriodisk");
+        Log.i("MinPeriodisk","I MinPeriodisk");
         //Tar verdien fra shared preferences og lager et kalender objekt som kan brukes i alarmManager
         SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
         String tidspunkt=prefs.getString("preference_time","08:00");
@@ -42,9 +42,12 @@ public class MinPeriodisk extends Service {
 
         // setter alarm
         AlarmManager alarm =(AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 1000, pintent);
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pintent);
 
-        Log.i("MinPeriodisk","I slutten av MinPeriodisk");
+        /* Kommentert ut kode som sjekker hvert minutt. Dette ble brukt under testing av appen
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 1000, pintent);
+         */
+
         return super.onStartCommand(intent, flags, startId);
     }
 
